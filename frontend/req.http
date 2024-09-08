@@ -1,0 +1,99 @@
+post http://localhost:4000/author-api/register
+Content-Type: application/json
+
+{
+    "role":"author",
+    "username":"vikas",
+    "password":"vikas",
+    "email":"vikas@email.com"
+}
+###
+get http://localhost:4000/author-api/author
+
+###
+post http://localhost:4000/user-api/register
+Content-Type: application/json
+
+{
+    "role":"user",
+    "username":"vikas",
+    "password":"vikas",
+    "email":"vikas@email.com"
+}
+###
+get http://localhost:4000/user-api/user
+
+###author login
+post http://localhost:4000/author-api/login
+Content-Type: application/json
+
+{
+    "role":"author",
+    "username":"vikas",
+    "password":"vikas"
+   
+}
+###user login
+post http://localhost:4000/user-api/login
+Content-Type: application/json
+
+{
+    "role":"user",
+    "username":"vikas",
+    "password":"vikas"
+   
+}
+###add article by author
+post http://localhost:4000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"{{$timestamp}}",
+    "title":"Javascript basics",
+    "category":"programming",
+    "content":"asjhi dihkdjbc",
+    "dateOfCreation":"{{$datetime iso8601}}",
+    "dateOfModification":"{{$datetime iso8601}}",
+    "username":"vikas",
+    "comments":[ ],
+    "status":true
+}
+
+###read own artciles by author
+get http://localhost:4000/author-api/articles/vikas
+
+###delete an article 
+put http://localhost:4000/author-api/articles/vikas/1711010633
+Content-Type: application/json
+
+{
+    "status":false
+}
+
+###read all artciles by user
+get http://localhost:4000/user-api/articles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa2FzIiwiaWF0IjoxNzExMDE0ODc5LCJleHAiOjE3MTEwMTQ5OTl9.1-lG50xbikJk2W3A56LxkmmPGOzwb47lFtKjzqf5OZ0
+ 
+###edit article by author
+put http://localhost:4000/author-api/article
+Content-Type: application/json
+
+{
+    "articleId":"1711010633",
+    "title":"Javascript basics part-1",
+    "category":"web",
+    "content":"asjhi dihkdjbchgvjbnmfv",
+    "dateOfCreation":"2024-03-21T05:58:37.869Z",
+    "dateOfModification":"{{$datetime iso8601}}",
+    "username":"vikas",
+    "comments":[ ],
+    "status":true
+}
+###add comment by user
+put http://localhost:4000/user-api/article/1711010633/comment
+Content-Type: application/json
+
+{
+    "username":"anu",
+    "comment":"best article, great for beginners"
+}
